@@ -5,7 +5,7 @@ window.addEventListener('load', function () {
 	var y; //position
 	var w;//ширина окна
 	var h;//высота окна
-	var countStars = 110; //количество звезд
+	var countStars = 120; //количество звезд
 	var t = 20; //скорростьобновления экрана
 	var s = 0.3//скорость шариков
 	function resize() {
@@ -27,7 +27,7 @@ window.addEventListener('load', function () {
 		this.y = getRandomInt(5, h - 5);
 		this.vx = getRandomInRange(-s, s);
 		this.vy = getRandomInRange(-s, s);
-		this.radius = getRandomInt(1, 2);
+		this.radius = Math.random();
 		this.color = 'white';
 		this.connected = false;
 	}
@@ -42,7 +42,7 @@ window.addEventListener('load', function () {
 	function drawBgc() {
 		if (canvas.getContext) {
 			ctx.beginPath();
-			ctx.fillStyle = "#010103";
+			ctx.fillStyle = "#000000";
 			ctx.fillRect(0, 0, w, h);
 			ctx.closePath();
 		}
@@ -74,7 +74,7 @@ window.addEventListener('load', function () {
 				//проходим по всем точкам и находим ближайшие - соединяемся
 				for (var j = 0; j < stars.length; j++) {
 					let zxc = Math.sqrt(((stars[i].x - stars[j].x) ** 2) + ((stars[i].y - stars[j].y) ** 2))
-					if (zxc <= 180) {
+					if (zxc <= 150) {
 						ctx.beginPath();
 						ctx.strokeStyle = star.color;
 						ctx.moveTo(stars[i].x, stars[i].y);
@@ -107,7 +107,7 @@ window.addEventListener('load', function () {
 		let yAxis = ((e.pageY));
 		for (var i = 0; i < stars.length; i++) {
 			let zxc = Math.sqrt(((xAxis - stars[i].x) ** 2) + ((yAxis - stars[i].y) ** 2));
-			if (zxc <= 200) { stars[i].connected = true; }
+			if (zxc <= 150) { stars[i].connected = true; }
 			else { stars[i].connected = false; }
 		}
 	});
